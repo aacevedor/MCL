@@ -24,9 +24,6 @@ web/.eslintrc
 web/.gitattributes
 web/.htaccess
 web/.ht.router.php
-web/autoload.php
-web/index.php
-web/robots.txt
 web/sites/default/default.services.pantheon.preproduction.yml
 web/sites/default/default.services.yml
 web/sites/default/default.settings.php
@@ -34,7 +31,6 @@ web/sites/default/settings.pantheon.php
 web/sites/development.services.yml
 web/sites/example.settings.local.php
 web/sites/example.sites.php
-web/update.php
 web/web.config
 
 # Add directories containing build assets below.
