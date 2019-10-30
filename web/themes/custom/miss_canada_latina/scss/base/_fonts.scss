@@ -1,0 +1,44 @@
+
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Parisienne', cursive;
+  color: $mcl-title-color;
+}
+h1{
+  font-size: $mcl-h1-title-font-size;
+}
+h2{ 
+  font-size: $mcl-h2-title-font-size; 
+}
+h3{}
+h4{}
+h5{}
+h6{}
+
+
+p,
+span,
+li,
+div,
+strong {
+  font-family: 'Lora', serif;
+}
+
+h4.label{
+  background-color: $mcl-title-color;
+}
+
+
+p{
+  color: $color-text;
+    margin: 10px 0;
+    font-size: $body-font-size;
+    display: inline-block;
+}
+
+

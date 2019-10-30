@@ -1,0 +1,47 @@
+{#
+/**
+* @file
+* Default theme implementation to display a block.
+*
+* @see template_preprocess_block()
+*
+* @ingroup themeable
+*/
+#}
+{% set classes = [
+    'clear-both',
+] %}
+<div{{ attributes.addClass(classes) }}>
+    {% for content in value %}
+        <p>{{value}}</p>
+    {% endfor %}
+    <form  action="/node/{{content['nid']}}/buy" method="post" id="payment-form">
+    <div class="form-row">
+        <div class="columns">
+            <label for="name">
+                Name
+            </label>
+            <input id="name" class="StripeElement" name="name" placeholder="Jenny Rosen" value="{{content['current_user_name']}}" required>
+        </div>
+        <div class="columns">
+            <label for="email">
+                Email Address
+            </label>
+            <input id="email" class="StripeElement" name="email" placeholder="jenny.rosen@example.com" value="{{content['current_user_mail']}}" required>
+        </div>
+        <div class="columns">
+            <label for="card-element">
+            Credit or debit card
+            </label>
+            <div id="card-element" class="">
+            <!-- A Stripe Element will be inserted here. -->
+            </div>
+        <div>
+
+        <!-- Used to display form errors. -->
+        <div id="card-errors" role="alert"></div>
+    </div>
+
+  <button class="button btn">Submit Payment</button>
+</form>
+</div>

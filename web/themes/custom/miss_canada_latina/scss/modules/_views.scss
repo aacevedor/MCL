@@ -1,0 +1,41 @@
+#block-miss-canada-latina-content{
+    
+    .item-list{
+        ul{
+            display: inline-block;
+            width: 100%;
+            margin: 0;
+                li{
+                    padding: 2px;
+                }
+            }
+    }
+    .more-link{
+        text-align: center;
+        
+        vertical-align: middle;
+        margin: 0 0 1rem 0;
+        font-family: inherit;
+        padding: 0.85em 1em;
+        -webkit-appearance: none;
+        border: 1px solid transparent;
+        border-radius: 0;
+        transition: background-color 0.25s ease-out,color 0.25s ease-out;
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+        background-color: $mcl-body-background;
+        a{
+            color:white;
+            text-transform: uppercase;
+            display: inline-block;
+            border: solid 1px $mcl-title-color;
+            padding: 15px;
+        }
+    }
+    
+}
+
+.list-non-decoration{
+    list-style: none;
+}

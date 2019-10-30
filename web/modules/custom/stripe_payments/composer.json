@@ -1,0 +1,13 @@
+{
+    "name": "stripe_payments",
+    "type": "drupal-module",
+    "description": "This module integrate stripe payments with diferents entity types in drupal",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/stripe_payments",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/stripe_payments",
+        "source": "http://cgit.drupalcode.org/stripe_payments",
+    },
+}

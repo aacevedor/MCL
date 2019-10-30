@@ -1,0 +1,7 @@
+stripe_payments.admin:
+  title: 'Stripe Administration'
+  description: 'Stripe module administration'
+  parent: system.admin_config
+  route_name: stripe_payments.config_form
+  weight: 100
+  menu_name: admin

@@ -1,0 +1,131 @@
+<?php
+
+// Add your custom theme override functions here.
+
+/**
+ * Implements hook_preprocess_block()
+ */
+function miss_canada_latina_preprocess_block(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_field().
+ */
+function miss_canada_latina_preprocess_field(&$variables, $hook) {
+}
+
+/**
+ * Implements template_preprocess_html().
+ *
+ * Adds additional classes
+ */
+function miss_canada_latina_preprocess_html(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_node
+ *
+ * Add template suggestions and classes
+ */
+function miss_canada_latina_preprocess_node(&$variables) {
+}
+
+/**
+ * Implements template_preprocess_page
+ *
+ * Add convenience variables and template suggestions
+ */
+function miss_canada_latina_preprocess_page(&$variables) {
+
+  if($variables['is_front']){
+      unset($variables['page']['content']['miss_canada_latina_content']);
+  }
+  $site_name = isset($variables['site_name']) ? $variables['site_name'] : \Drupal::config('system.site')->get('name');
+
+  $variables['logo_img'] = ''; 
+
+  $logo = theme_get_setting('logo.url');
+
+  if (!empty($logo)) {
+    $elements = [
+      '#theme' => 'image',
+      '#uri' => $logo,
+      '#attributes' => [
+        'alt' => strip_tags($site_name) . ' ' . t('logo'),
+        'title' => strip_tags($site_name) . ' ' . t('Home'),
+        'class' => ['logo'],
+      ]
+    ];
+
+    $variables['logo_img'] = $elements;
+  }
+
+  $title = strip_tags($site_name) . ' ' . t('Home');
+  $url = \Drupal\Core\Url::fromRoute('<front>');
+  $url->setOption('attributes', ['title' => $title]);
+
+  if (theme_get_setting('zurb_foundation_page_site_logo')) {
+    $variables['linked_logo'] = '';
+    if (!empty($variables['logo_img'])) {
+      $variables['linked_logo'] = Link::fromTextAndUrl($variables['logo_img'], $url)->toString();
+    }
+  }
+
+  if (theme_get_setting('zurb_foundation_page_site_name')) {
+    $variables['linked_site_name'] = '';
+    if (!empty($site_name)) {
+      $variables['linked_site_name'] = Link::fromTextAndUrl($site_name, $url)->toString();
+    }
+  }
+
+  // Convenience variables
+  if (isset($variables['page']['sidebar_first'])) {
+    $left = $variables['page']['sidebar_first'];
+  }
+  if (isset($variables['page']['sidebar_second'])) {
+    $right = $variables['page']['sidebar_second'];
+  }
+
+  // Dynamic sidebars
+  if (!empty($left) && !empty($right)) {
+    $variables['main_grid'] = 'medium-6';
+    $variables['sidebar_first_grid'] = 'medium-3'; // medium-pull-6
+    $variables['sidebar_sec_grid'] = 'medium-3';
+  }
+  elseif (empty($left) && !empty($right)) {
+    $variables['main_grid'] = 'medium-9';
+    $variables['sidebar_first_grid'] = '';
+    $variables['sidebar_sec_grid'] = 'medium-3';
+  }
+  elseif (!empty($left) && empty($right)) {
+    $variables['main_grid'] = 'medium-9';
+    $variables['sidebar_first_grid'] = 'medium-3';
+    $variables['sidebar_sec_grid'] = '';
+  }
+  else {
+    $variables['main_grid'] = 'large-12';
+    $variables['sidebar_first_grid'] = '';
+    $variables['sidebar_sec_grid'] = '';
+  }
+
+  // Add classes to highlighted region.
+  if (!empty($variables['page']['highlighted'])) {
+    $variables['page']['highlighted']['#attributes']['class'][] = 'region-highlighted';
+    $variables['page']['highlighted']['#attributes']['class'][] = 'panel';
+    $variables['page']['highlighted']['#attributes']['class'][] = 'callout';
+  }
+
+  // Check to see if the Meta Header should be in the Grid.
+  $variables['meta_header_grid'] = theme_get_setting('zurb_foundation_meta_header_grid');
+
+  // Make sure site_name is always set, in case there's only a default.
+  $variables['site_name'] = $site_name;
+
+  // Variable to disable hard-coded login elements.
+  $variables['show_account_info'] = theme_get_setting('zurb_foundation_page_account_info');
+}
+
+/**
+ * Implements template_preprocess_views_view().
+ */
+function miss_canada_latina_preprocess_views_view(&$variables) {}

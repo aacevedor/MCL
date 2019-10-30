@@ -1,0 +1,217 @@
+.block-titulocandidatas, .block-titulosponsors{
+    h1{
+        margin:0;
+        line-height: 0.9;
+    }
+    p{
+        font-size: 1.8em!important;
+        margin:0;
+    }
+} 
+
+
+// menus
+
+.menu-uppercase{
+    ul{
+        li{
+            text-transform: uppercase;
+        }
+    }
+} 
+
+#block-miss-canada-latina-main-menu{
+    ul{
+        float: right;
+        li{
+            a{
+                color:$white
+            }
+            a.is-active{
+                color:$mcl-title-color 
+            }
+        }
+    }
+}
+
+#block-socialmedialinks{
+    padding: 20px 0; 
+    ul{
+        float: right;
+        li{
+            a{
+                color:$color-text
+            }
+        }
+    }
+}
+
+#block-sponsortaxonomymenu{
+    margin: 30px 0;
+    display: inline-grid;
+    ul.menu{
+        display: inline-block;
+        margin: 0 auto;
+        li{
+            a{
+                color:$color-text
+            }
+            a.is-active{
+                color:$white
+            }
+        }
+    }
+}
+ 
+
+#block-views-block-capitulos-block-1{
+    margin: 70px 0px 100px 0;
+    h2{
+        
+        text-align: center;
+        margin: 0 0 45px 0;
+
+    }
+
+    header{
+        color:$white;
+        text-align: center;
+        font-size: $info-font-size;
+    }
+
+    .field-item{
+        text-align: center;
+        iframe{
+            min-width: 80%;
+            margin: 40px 0 0 0;
+            height: 444px;
+        }
+    }
+}
+
+#block-views-block-capitulos-block-3{
+    margin: 70px 0px 100px 0;
+    h2{
+        color:$white; 
+        text-align: center;
+        margin: 0 0 45px 0;
+
+    }
+
+    header{
+        color:$white;
+        text-align: center;
+        font-size: $info-font-size;
+    }
+
+    .field-item{
+        text-align: center;
+        iframe{
+            min-width: 80%;
+            margin: 40px 0 0 0;
+            height: 444px;
+        }
+    }
+    .more-link{
+        text-align: center;
+        
+        vertical-align: middle;
+        margin: 0 0 1rem 0;
+        font-family: inherit;
+        padding: 0.85em 1em;
+        -webkit-appearance: none;
+        border: 1px solid transparent;
+        border-radius: 0;
+        transition: background-color 0.25s ease-out,color 0.25s ease-out;
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+        a{
+            color:white;
+            text-transform: uppercase;
+            display: inline-block;
+            border: solid 1px $white;
+            padding: 15px;
+        }
+    }
+}
+
+#block-views-block-capitulos-block-2{
+    margin: 70px 0px 100px 0;
+    h2{
+        text-align: center;
+        margin: 0 0 45px 0;
+    } 
+    ul.slide__content{
+        li.slide__grid{
+            min-width: 360px;
+        }
+    }
+}
+
+.callout.secondary{
+    background-color: $mcl-body-background;
+    border-top: solid 1px $white;
+    padding: 35px 0 20px 0px;
+    div{
+        color:$color-text;
+    }
+    
+}
+
+#block-quicktabssponsors{
+    margin: 70px 0px 100px 0;
+        
+    h2{
+        text-align: center;
+        margin: 0 0 45px 0;
+    }
+
+    ul.quicktabs-tabs{
+        margin: 0 0 45px 0;
+        text-align: center;
+        li{
+            padding: 10px 20px;
+            a{
+              color:$color-text;
+              text-transform: uppercase;
+            }
+        }
+        li.active{
+            a{color:$white}
+        }
+        
+    }
+}
+
+
+#block-views-block-candidatas-block-1{
+
+    margin: 70px 0px 100px 0;
+        
+    
+    h2{
+        text-align: center;
+        margin: 0 0 45px 0;
+    }
+
+    header{
+        color:$white;
+        text-align: center;
+        font-size: $info-font-size;
+    }
+
+    .owl-item{
+        div{
+            padding: 0;
+        }
+        &:hover{
+            .field-node--node-title{display: block;}
+            .field-node--field-fecha{display: block;}
+            .field-node--field-pais{display: block;}
+        }
+    }
+    .field-node--node-title{display: none;}
+    .field-node--field-fecha{display: none;}
+    .field-node--field-pais{display: none;}
+}

@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * @file
+ * Contains stripe_payments.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function stripe_payments_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the stripe_payments module.
+    case 'help.page.stripe_payments':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module integrate stripe payments with diferents entity types in drupal') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function stripe_payments_theme() {
+  return [
+    'stripe_payments' => [
+      'render element' => 'children',
+    ],
+
+    'stripe_payments_charge_block' => [
+      'variables' => [
+        'content' => NULL
+      ],
+      'render element' => 'children',
+    ],
+  ];
+}
+
+
+/**
+ * Implements hooko_page_attachments()
+ */
+
+function stripe_payments_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] =
+    'stripe_payments/global-stripe_payments';
+}

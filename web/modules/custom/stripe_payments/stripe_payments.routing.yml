@@ -1,0 +1,16 @@
+stripe_payments.config_form:
+  path: 'admin/config/stripe_payments'
+  defaults:
+    _form: '\Drupal\stripe_payments\Form\StripePaymentsConfigForm'
+    _title: 'StripePaymentsConfigForm'
+  requirements:
+    _permission: 'administer site configuration'
+
+
+stripe_payments.stripe_payments_charge_controller_hello:
+  path: '/node/{nid}/buy'
+  defaults:
+    _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::create_charge'
+    _title: 'Buy'
+  requirements:
+    _permission: 'access content'

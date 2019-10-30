@@ -1,0 +1,13 @@
+global-stripe_payments:
+  version: 1.x
+  js:
+    https://js.stripe.com/v3/: { type:external }
+
+stripe_payments:
+  version: 1.x
+  css:
+    theme:
+      css/stripe_payments.css: {}
+  js:
+    js/stripe_payments.js: {}
+

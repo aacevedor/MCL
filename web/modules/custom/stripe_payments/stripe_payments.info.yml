@@ -1,0 +1,7 @@
+name: 'Stripe Payments'
+type: module
+description: 'This module integrate stripe payments with diferents entity types in drupal'
+core: 8.x
+package: 'Afar Systems'
+
+configure: stripe_payments.config_form

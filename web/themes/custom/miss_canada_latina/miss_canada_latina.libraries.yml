@@ -1,0 +1,13 @@
+global:
+  version: VERSION
+  css:
+    base:
+      css/miss_canada_latina.css: {}
+  js:
+    js/miss_canada_latina.js: {}
+fonts:
+  css:
+    theme:
+      '//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap': {type: external}
+      '//fonts.googleapis.com/css?family=Parisienne&display=swap': {type: external}
+  

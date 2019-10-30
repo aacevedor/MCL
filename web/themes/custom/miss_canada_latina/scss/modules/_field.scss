@@ -1,0 +1,57 @@
+.field-node--body{
+    color: $color-text;
+    margin: 10px 0;
+    font-size: $body-font-size;
+    display: inline-block;
+}
+
+
+
+.field-node--field-fecha{
+    color:$white;
+    font-size: $info-font-size;
+    padding-left: 0;
+}
+
+.field-node--field-pais{
+    a {
+        color:$white;
+        font-size: $info-font-size;
+    }
+    
+} 
+.field-node--field-imagen{
+
+    img{
+        width:100%;
+    }
+    
+}
+
+
+.field-node--field-estatura{
+
+    background-color: $mcl-title-color;
+    color:$white;
+    text-align: left;
+}
+.field-node--field-cintura{
+    background-color: $mcl-title-color;
+    color:$white;
+    text-align: left;
+}
+.field-node--field-caderas{
+    background-color: $mcl-title-color;
+    color:$white;
+    text-align: left;
+}
+.field-node--field-busto{
+    background-color: $mcl-title-color;
+    color:$white;
+    text-align: left;
+}
+.field-node--field-color-de-ojos{
+    background-color: $mcl-title-color;
+    color:$white;
+    text-align: left;
+}
