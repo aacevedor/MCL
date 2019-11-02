@@ -6,7 +6,7 @@
             width: 100%;
             margin: 0;
                 li{
-                    padding: 2px;
+                    // padding: 2px;
                 }
             }
     }
@@ -38,4 +38,85 @@
 
 .list-non-decoration{
     list-style: none;
+}
+
+
+
+.page-view-candidatas{
+    .item-list{
+        ul{
+            list-style: none;
+            li{
+                border: 1px solid $mcl-body-background;
+                margin: 0 0 60px 0;
+                position: relative;
+                div.row{
+                    
+                    div{
+                        &:first-child{
+                            padding: 0!important;
+                        }
+                    }
+
+                    &:last-child{
+                        background-color:$white;
+                        padding: 20px;
+                        .field-node--node-title{
+                            h2{
+                                font-family: 'Lora', serif;
+                                font-size: 29px;
+                                font-weight: 600;
+                                display: inline-block;
+                                width: 100%;
+                                text-align: left;
+                                margin: 0;
+                            }
+                        }
+
+                        .field-node--field-fecha{
+                            color:$black;
+                        }
+                        .field-node--field-pais{
+                            a{color:$black}
+                        }
+
+                    }
+                }
+                &:hover{
+                    div.row{
+                        
+                        background-color: $mcl-title-color;
+                        
+                    }
+
+                    div.row:nth-child(2n) {
+                        position: absolute;
+                        top: 0;
+                        bottom: 0;
+                        left: 0;
+                        right: 0;
+                        background-color:#e55b985e;
+                        margin-right: 0;
+                        margin-left: 0;
+                        padding-right: 0;
+                        padding-left: 0;
+                    }
+                    
+                    .field-node--node-title{
+                        h2{
+                            color: $white;
+                        }
+                    }
+
+                    .field-node--field-fecha div div{
+                        color:$white;
+                    }
+                    .field-node--field-pais div div a{
+                        color:$white !important;
+                    }
+
+                }
+            }
+        }
+    }
 }
