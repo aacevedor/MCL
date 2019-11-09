@@ -1,3 +1,29 @@
+
+@mixin more-link-button {
+    .more-link{
+        text-align: center;
+        
+        vertical-align: middle;
+        margin: 0 0 1rem 0;
+        font-family: inherit;
+        padding: 0.85em 1em;
+        -webkit-appearance: none;
+        border: 1px solid transparent;
+        border-radius: 0;
+        transition: background-color 0.25s ease-out,color 0.25s ease-out;
+        font-size: 0.9rem;
+        line-height: 1;
+        cursor: pointer;
+        a{
+            color:white;
+            text-transform: uppercase;
+            display: inline-block;
+            border: solid 1px $white;
+            padding: 15px;
+        }
+    }
+}
+
 .block-titulocandidatas, .block-titulosponsors{
     h1{
         margin:0;
@@ -112,28 +138,7 @@
             height: 444px;
         }
     }
-    .more-link{
-        text-align: center;
-        
-        vertical-align: middle;
-        margin: 0 0 1rem 0;
-        font-family: inherit;
-        padding: 0.85em 1em;
-        -webkit-appearance: none;
-        border: 1px solid transparent;
-        border-radius: 0;
-        transition: background-color 0.25s ease-out,color 0.25s ease-out;
-        font-size: 0.9rem;
-        line-height: 1;
-        cursor: pointer;
-        a{
-            color:white;
-            text-transform: uppercase;
-            display: inline-block;
-            border: solid 1px $white;
-            padding: 15px;
-        }
-    }
+    @include more-link-button;
 }
 
 #block-views-block-capitulos-block-2{
@@ -255,4 +260,53 @@
     // .field-node--node-title{display: none;}
     // .field-node--field-fecha{display: none;}
     // .field-node--field-pais{display: none;}
+}
+
+#block-views-block-destacado-principal-block-1{
+    position: relative;c
+    .field-node--field-image{
+        position: relative;
+    }
+    .field-node--field-temporada{
+        top: 25%;
+        position: absolute;
+        left: 20%;
+        font-size: 2em;
+        a{
+            font-family: 'Parisienne', cursive;
+            color: #e55b99;
+        }
+    }
+
+    .field-node--node-title{
+        top: 34%;
+        position: absolute;
+        left: 20%;
+        max-width: 43%;
+        font-size: 3em;
+        h2{
+            font-family: 'Lora', serif;
+            color: white;
+            font-size: 1.7em;
+            line-height: 80px;
+        }
+        
+    }
+
+    .field-node--node-link{
+        bottom: 20%;
+        position: absolute;
+        left: 20%;
+        .field-item{
+            text-align: center;
+            iframe{
+                min-width: 80%;
+                margin: 40px 0 0 0;
+                height: 444px;
+            }
+        }
+        @include more-link-button;
+    }
+
+    
 }
