@@ -38,6 +38,13 @@ function stripe_payments_theme() {
       ],
       'render element' => 'children',
     ],
+    
+    'status_user_stripe_payments_block' => [
+      'variables' => [
+        'content' => NULL
+      ],
+      'render element' => 'children',
+    ],
   ];
 }
 
