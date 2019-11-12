@@ -92,13 +92,43 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
    * {@inheritdoc}
    */
   public function build() {
+    $entities = [];
+    $transaccions = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'transaccion', 'field_usuario' => $this->currentUser->id()]);
+    
+    foreach($transaccions as $key => $value){
+      $tax_name = $value->get('field_tipo_de_transaccion')->referencedEntities()[0]->name->value;
+      $entities[$tax_name][] = $value;
+    }
+
+    $total = [];
+    if( count($entities) ){
+      $array_keys = array_keys($entities);
+      foreach($array_keys as $key => $value){
+        foreach($entities[$value] as $key => $entity){
+          $total[$value] += $entity->field_cantidad->value;
+        }
+      }
+      $total['diference'] = self::array_subtract( $total );
+    }else{  
+      $total = 0;
+    }
+
     $build = [];
     $build['#theme'] = 'status_user_stripe_payments_block';
     $build['#content']['data'] = $this->configuration['inputtext'];
     $build['#content']['user'] = $this->currentUser->getDisplayName();
+    $build['#content']['total'] = $total;
     
-
     return $build;
+  }
+
+
+  public function array_subtract(array $input) {
+    $result = reset($input);                            // First element of the array
+    foreach (array_slice($input, 1) as $value) {        // Use array_slice to avoid subtracting the first element twice
+        $result -= $value;                          // Subtract the value
+    }
+    return $result;                                // Return the result
   }
 
 }

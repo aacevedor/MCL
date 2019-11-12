@@ -8,5 +8,22 @@
 * @ingroup themeable
 */
 #}
+<div class="large-12 medium-12 small-12 columns" id="stripe-user-status-payments">
+    <div class="large-12 medium-12 small-12 columns">Hola</div>
+    <div class="large-12 medium-12 small-12 columns">
+        <span class="name">{{content['user']}}</span>
+    </div>
+    <div class="large-12 medium-12 small-12 columns border-button">
+        <span class="large-8 medium-8 small-12 columns" > Votos Comprados:</span>
+        <span class="large-4 medium-4 small-12 columns">{{content['total']['Compra']}}</span>
+    </div>
+    <div class="large-12 medium-12 small-12 columns border-button">
+        <span class="large-8 medium-8 small-12 columns"> Votos Realizados:</span>
+        <span class="large-4 medium-4 small-12 columns">{{content['total']['Voto']}}</span>
+    </div>
+    <div class="large-12 medium-12 small-12 columns border-button">
+        <span class="large-8 medium-8 small-12 columns"> Votos Disponibles:</span>
+        <span class="large-4 medium-4 small-12 columns">{{content['total']['diference']}}</span>
+    </div>
+</div>
 
-Hola, {{content['user']}}

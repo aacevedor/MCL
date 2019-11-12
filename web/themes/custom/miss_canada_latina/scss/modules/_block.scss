@@ -310,3 +310,25 @@
 
     
 }
+#stripe-user-status-payments{
+    color:#fff;
+    
+    div{
+        color:#fff;
+    }
+    span{
+        color:#fff;
+    }
+
+    span.name{
+        font-size: 2em;
+        color:$mcl-title-color;
+    }
+
+    .border-button{
+        border-bottom: solid 1px $color-text;
+        padding: 15px 0;
+        font-size: 1em;
+    }
+
+}   
