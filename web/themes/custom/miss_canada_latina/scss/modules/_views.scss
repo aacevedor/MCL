@@ -70,6 +70,9 @@
                                 width: 100%;
                                 text-align: left;
                                 margin: 0;
+                                a{
+                                    color: $mcl-title-color;
+                                }
                             }
                         }
 
@@ -90,7 +93,7 @@
                     }
 
                     div.row:nth-child(2n) {
-                        position: absolute;
+                        //position: absolute;
                         top: 0;
                         bottom: 0;
                         left: 0;
@@ -104,7 +107,7 @@
                     
                     .field-node--node-title{
                         h2{
-                            color: $white;
+                            a {color: white!important}
                         }
                     }
 

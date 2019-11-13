@@ -224,14 +224,17 @@
                     
 
                     .field-node--node-title{
-                            h2{
-                        font-family: 'Lora', serif;
-                        font-size: 29px;
-                        font-weight: 600;
-                        display: inline-block;
-                        width: 100%;
-                        text-align: left;
-                        margin: 0;
+                        h2{
+                            font-family: 'Lora', serif;
+                            font-size: 29px;
+                            font-weight: 600;
+                            display: inline-block;
+                            width: 100%;
+                            text-align: left;
+                            margin: 0;
+                            a{
+                                color: $mcl-title-color;
+                            }
                         }
                     }
 
@@ -332,3 +335,31 @@
     }
 
 }   
+
+
+.field-name-dynamic-block-fieldblock-content--como-votar-{
+    header{
+        div{
+            span{
+                color:white;
+                cfont-size: 1.4vw;
+            }
+        }
+    }
+
+    .views-row{
+        border-bottom: solid 1px $color-text;
+        padding: 30px;
+        .views-field-title{
+            div{
+                a{
+                    color: $color-text;
+                }
+            }
+            
+        }
+        .views-field-field-price{
+            color: white;
+        }
+    }
+}
