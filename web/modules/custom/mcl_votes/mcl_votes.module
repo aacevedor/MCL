@@ -31,5 +31,11 @@ function mcl_votes_theme() {
     'mcl_votes' => [
       'render element' => 'children',
     ],
+    'generate_mcl_vote_form_block' => [
+      'variables' => [
+        'content' => NULL
+      ],
+      'render element' => 'children',
+    ],
   ];
 }

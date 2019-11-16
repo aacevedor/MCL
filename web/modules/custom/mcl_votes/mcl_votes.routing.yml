@@ -7,3 +7,10 @@ mcl_votes.generate_mcl_vote:
   methods: ['GET']
   requirements:
     _permission: 'access content'
+mcl_votes.generate_mcl_vote_form:
+  path: '/mcl_votes/form'
+  defaults:
+    _form: '\Drupal\mcl_votes\Form\GenerateMclVoteForm'
+    _title: 'GenerateMclVoteForm'
+  requirements:
+    _access: 'TRUE'

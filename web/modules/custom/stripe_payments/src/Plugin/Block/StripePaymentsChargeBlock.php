@@ -8,7 +8,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Config\ConfigManagerInterface;
 use Drupal\Core\DependencyInjection\ContainerBuilder;
 use Drupal\Core\Session\AccountProxyInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\user\UserInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
+use Drupal\Core\Access\AccessResult;
+
 
 /**
  * Provides a 'StripePaymentsChargeBlock' block.
@@ -77,6 +81,17 @@ class StripePaymentsChargeBlock extends BlockBase implements ContainerFactoryPlu
   public function getCacheMaxAge() {
     return 0;
   }
+
+    /**
+   * {@inheritdoc}
+   */
+
+  protected function blockAccess(AccountInterface $account) {
+    return AccessResult::allowedIf(in_array('authenticated',$account->getRoles()));
+  }
+
+
+
 
   /**
    * {@inheritdoc} 

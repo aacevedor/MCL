@@ -34,6 +34,7 @@
         "drupal/field_orbit": "^1.0",
         "drupal/focal_point": "^1.2",
         "drupal/go_back": "^1.4",
+        "drupal/login_onlyemail": "^1.4",
         "drupal/menu_item_role_access": "^1.0",
         "drupal/menu_link_attributes": "^1.0",
         "drupal/module_filter": "^3.1",

@@ -363,3 +363,46 @@
         }
     }
 }
+
+#generate-mcl-vote-form{
+    text-align: center;
+    .my_top_message{
+        color: white;
+        border: solid 1px white;
+        background-color: #e55b9885;
+        padding: 10px;
+        margin: 9px;
+        font-size: 20px;
+    }
+
+    input#edit-submit{
+        background-image: url(/themes/custom/miss_canada_latina/images/favorite_icon.png);
+        width: 175px;
+        height: 137px;
+        background-color: #fff0;
+    }
+
+
+    .entity-name{
+        color: white;
+        font-size: 20px;
+        
+    }
+}
+
+
+
+#block-miss-canada-latina-content{
+
+    form{
+        max-width: 50%;
+        label, div{
+            color:$white;
+        }
+        label{
+            font-family: 'Parisienne', cursive;
+            color: #e55b99;
+            font-size: 2vw;
+        }
+    }
+}

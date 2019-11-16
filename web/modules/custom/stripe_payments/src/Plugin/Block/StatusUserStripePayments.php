@@ -55,6 +55,7 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
     return 0;
   }
 
+  
   /**
    * {@inheritdoc}
    */

@@ -1,0 +1,7 @@
+services:
+  logger.channel.mcl_votes:
+    parent: logger.channel_base
+    arguments: ['mcl_votes']
+  mcl_votes.generate_vote:
+    class: Drupal\mcl_votes\MclVotesGenerateVoteService
+    arguments: ['@current_route_match', '@current_user', '@entity.manager']
