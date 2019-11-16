@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains mcl_votes.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function mcl_votes_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the mcl_votes module.
+    case 'help.page.mcl_votes':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('This module allow generate votes for any entity') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function mcl_votes_theme() {
+  return [
+    'mcl_votes' => [
+      'render element' => 'children',
+    ],
+  ];
+}

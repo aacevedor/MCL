@@ -1,0 +1,13 @@
+{
+    "name": "mcl_votes",
+    "type": "drupal-module",
+    "description": "This module allow generate votes for any entity",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/mcl_votes",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/mcl_votes",
+        "source": "http://cgit.drupalcode.org/mcl_votes",
+    },
+}

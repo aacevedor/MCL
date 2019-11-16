@@ -47,6 +47,14 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
     $this->currentUser = $current_user;
   }
 
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
+  }
+
   /**
    * {@inheritdoc}
    */

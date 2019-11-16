@@ -1,0 +1,9 @@
+
+mcl_votes.generate_mcl_vote:
+  path: '/mcl_votes/api/generate/mcl_vote/{entity_type}/{nid}'
+  defaults:
+    _controller: '\Drupal\mcl_votes\Controller\MclApiController::GenerateMclVote'
+    _title: 'Generate Mcl Vote'
+  methods: ['GET']
+  requirements:
+    _permission: 'access content'

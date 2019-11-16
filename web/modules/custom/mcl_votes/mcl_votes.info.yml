@@ -1,0 +1,5 @@
+name: 'Miss Canada Latina Votes'
+type: module
+description: 'This module allow generate votes for any entity'
+core: 8.x
+package: 'Custom'

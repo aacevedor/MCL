@@ -9,6 +9,7 @@ use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\stripe_payments\StripePaymentsCreateInterface;
+use \Drupal\node\Entity\Node;
 /**
  * Class StripePaymentsChargeController.
  */
@@ -67,17 +68,27 @@ class StripePaymentsChargeController extends ControllerBase {
     $nid = $this->currentRoute->getParameter('nid');
     
     if( $request->stripeToken && $nid){
-      $node = $this->entityManager->getStorage('node')->load($this->currentRoute->getParameter('nid'));
-      if( $node ){
-        $charge = $this->stripePayments->create($node, $this->currentUser, $request->stripeToken);
+      $this->node = $this->entityManager->getStorage('node')->load($this->currentRoute->getParameter('nid'));  
+      if( $this->node ){
+        $charge = $this->stripePayments->create($this->node, $this->currentUser, $request->stripeToken);
       }else{
-        $this->redirect('/node/'.$nid);
+        $this->redirect('/node/'.$this->node->id());
       }
     }else{
       $this->redirect('/');
     }
 
     if($charge->status == 'succeeded'){
+      try {
+    
+        self::createEntity();
+    
+      } catch (\Throwable $th) {
+    
+        drupal_set_message($th->getMessage(), 'warning');
+    
+      }
+
       return [
         '#type' => 'markup',
         '#markup' => $this->t('Buy Complete!!')
@@ -90,6 +101,28 @@ class StripePaymentsChargeController extends ControllerBase {
     }
 
     
+  }
+
+
+  private function createEntity(){
+
+    $node = Node::create([
+        'type'                      => 'transaccion',
+        'title'                     => $this->t('purchase'). ' - ' .$this->node->title->value. ' - ' .$this->currentUser->getAccountName(),
+        'field_cantidad'            => $this->node->field_cantidad->value,
+        'field_producto'            => $this->node->id->value,
+        'field_tipo_de_transaccion' => 20,
+        'field_price'               => $this->node->field_price->value,
+        'field_usuario'             => $this->currentUser->id(),
+    ]);
+
+    if($node){
+      $node->save();
+      return true;
+    }else{
+      return false;
+    }
+
   }
 
 }

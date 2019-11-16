@@ -72,6 +72,13 @@ class StripePaymentsChargeBlock extends BlockBase implements ContainerFactoryPlu
   }
 
   /**
+   * {@inheritdoc}
+   */
+  public function getCacheMaxAge() {
+    return 0;
+  }
+
+  /**
    * {@inheritdoc} 
    */
   public function build() {
@@ -80,10 +87,11 @@ class StripePaymentsChargeBlock extends BlockBase implements ContainerFactoryPlu
     $build = [];
     $build['#theme'] = 'stripe_payments_charge_block';
     $build['stripe_payments_charge_block']['#markup'] = 'Implement StripePaymentsChargeBlock.';
-    $build['#attached']['library'] = 'stripe_payments/stripe_payments';
+    $build['#attached']['library'][] = 'stripe_payments/stripe_payments';
     $build['#content']['current_user_name'] = $this->currentUser->getAccountName();
     $build['#content']['current_user_mail'] = $this->currentUser->getEmail();
     $build['#content']['nid']               = $this->currentRoute->getParameter('node')->nid->value;
+    // $build['#cache']['max-age'] = 0;
 
     return $build;
   }

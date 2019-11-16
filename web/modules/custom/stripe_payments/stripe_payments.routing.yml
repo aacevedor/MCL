@@ -11,6 +11,8 @@ stripe_payments.stripe_payments_charge_controller_hello:
   path: '/node/{nid}/buy'
   defaults:
     _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::create_charge'
-    _title: 'Buy'
+    _title: 'Buy Sucessfull'
   requirements:
     _permission: 'access content'
+  options:
+    no_cache: 'TRUE'

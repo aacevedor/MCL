@@ -39,7 +39,7 @@ class StripePaymentsCreate implements StripePaymentsCreateInterface {
   public function create(Node $node, $user, string $token ){
     
     $charge = Charge::create([
-      'amount' => (int)$node->field_price->value,
+      'amount' => (int)$node->field_price->value * 100,
       'currency' => 'usd',
       'description' => $node->title->value,
       'source' => $token,
