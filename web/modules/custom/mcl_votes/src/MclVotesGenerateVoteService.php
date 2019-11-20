@@ -41,6 +41,13 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
    * @var \Drupal\Core\Entity
    */
   protected $node;
+
+    /**
+   * Drupal\Core\Entity\EntityManagerInterface definition.
+   *
+   * @var \Drupal\Core\Entity
+   */
+  protected $reto;
   
   
 
@@ -65,6 +72,24 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
     }else{
       $this->node = $this->currentRouteMatch->getParameter('node');
     }
+
+    $node_publish = $this->entityManager
+      ->getStorage('node')
+      ->loadByProperties([
+        'status' => 1,
+        'type' => 'reto'
+      ]);
+
+    if( count($node_publish) > 1 || count($node_publish) == 0 ){
+      try {
+        throw new \Exception(t("In this moment, isn't not posible"));  
+      } catch (\Throwable $th) {
+        return $th->getMessage();
+      }
+    }
+
+    $this->reto = $node_publish[key($node_publish)];
+
 
     try {
 
@@ -94,6 +119,7 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
       'field_tipo_de_transaccion' => 19,
       'field_usuario'             => $this->currentUser->id(),
       'field_candidata'           => $this->node->id(),
+      'field_reto'                => $this->reto->id()
     ]);
 
     if($node){

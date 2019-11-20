@@ -1,8 +1,7 @@
 
-@mixin more-link-button {
+@mixin more-link-button($text-aling, $border-color) {
     .more-link{
-        text-align: center;
-        
+        text-align: $text-aling;
         vertical-align: middle;
         margin: 0 0 1rem 0;
         font-family: inherit;
@@ -15,10 +14,10 @@
         line-height: 1;
         cursor: pointer;
         a{
-            color:white;
+            color: white;
             text-transform: uppercase;
             display: inline-block;
-            border: solid 1px $white;
+            border: solid 1px $border-color;
             padding: 15px;
         }
     }
@@ -138,7 +137,7 @@
             height: 444px;
         }
     }
-    @include more-link-button;
+    @include more-link-button(center, $white);
 }
 
 #block-views-block-capitulos-block-2{
@@ -278,6 +277,7 @@
         a{
             font-family: 'Parisienne', cursive;
             color: #e55b99;
+            font-size: 2.8vw;
         }
     }
 
@@ -290,7 +290,7 @@
         h2{
             font-family: 'Lora', serif;
             color: white;
-            font-size: 1.7em;
+            font-size: 3.7vw;
             line-height: 80px;
         }
         
@@ -308,7 +308,7 @@
                 height: 444px;
             }
         }
-        @include more-link-button;
+        @include more-link-button(center, $white);
     }
 
     
@@ -338,18 +338,33 @@
 
 
 .field-name-dynamic-block-fieldblock-content--como-votar-{
+    @include more-link-button(left, $mcl-title-color);
+
+    .contextual-region{
+        display: inline-block;
+        padding: 0 0 0 10px;
+    }
     header{
         div{
             span{
                 color:white;
-                cfont-size: 1.4vw;
+                font-size: 1.8vw;
+                font-weight: 500;
             }
         }
     }
-
+    
+    .views-row.column:last-child:not(:first-child), .views-row.columns:last-child:not(:first-child) {
+        float: left;
+        border-bottom: none;
+    }
     .views-row{
-        border-bottom: solid 1px $color-text;
-        padding: 30px;
+        border-bottom: solid 1px #6f7577;
+        margin: 16px 20px 20px 0px;
+        line-height: 23px;
+        max-width: 75%;
+        text-align: center;
+        padding: 0 0 20px 0;
         .views-field-title{
             div{
                 a{
@@ -404,5 +419,42 @@
             color: #e55b99;
             font-size: 2vw;
         }
+    }
+}
+
+.view-block-reto-de-la-semana {
+
+    @include more-link-button(left, $mcl-title-color);
+
+    .field-node--node-title {
+        h3{
+            font-family: 'Lora', serif;
+            color: white;
+            font-size: 2em;
+            line-height: 10px;
+            margin: 30px 0 10px 0px;
+        }
+        
+    }
+ 
+    .field-node--body {
+        
+    }
+
+    .field-node--field-rango-de-fechas{
+        
+    }
+
+
+    .note {
+        color: #6f7477;
+        font-size: 20px;
+    }
+}
+
+
+#block-miss-canada-latina-stripe-payments-charge-block{
+    .button{
+        margin: 19px 0px 19px 0px;
     }
 }
