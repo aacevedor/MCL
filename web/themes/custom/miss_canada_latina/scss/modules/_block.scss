@@ -160,6 +160,9 @@
     div{
         color:$color-text;
     }
+    a{
+        color: white;
+    }
     
 }
 
@@ -321,6 +324,8 @@
     }
     span{
         color:#fff;
+        font-size: 22px;
+    
     }
 
     span.name{
@@ -333,16 +338,25 @@
         padding: 15px 0;
         font-size: 1em;
     }
+    div.border-button:last-of-type{
+        border-bottom:none;
+    }
 
 }   
 
 
+
+.block-views-blockproductos-como-votar, 
 .field-name-dynamic-block-fieldblock-content--como-votar-{
     @include more-link-button(left, $mcl-title-color);
-
+    
     .contextual-region{
         display: inline-block;
         padding: 0 0 0 10px;
+        div.views-row:last-of-type {
+            border-bottom: none;
+        }
+        
     }
     header{
         div{
@@ -362,7 +376,7 @@
         border-bottom: solid 1px #6f7577;
         margin: 16px 20px 20px 0px;
         line-height: 23px;
-        max-width: 75%;
+        // max-width: 75%;
         text-align: center;
         padding: 0 0 20px 0;
         .views-field-title{
@@ -375,6 +389,7 @@
         }
         .views-field-field-price{
             color: white;
+            text-align: right;
         }
     }
 }
@@ -456,5 +471,41 @@
 #block-miss-canada-latina-stripe-payments-charge-block{
     .button{
         margin: 19px 0px 19px 0px;
+    }
+}
+
+
+
+.more-link {
+    text-align: left;
+    vertical-align: middle;
+    margin: 0 0 1rem 0;
+    font-family: 'Lora', serif;
+    padding: 0.85em 1em;
+    -webkit-appearance: none;
+    border: 1px solid #ffc1fd;
+    border-radius: 0;
+    transition: background-color 0.25s ease-out,color 0.25s ease-out;
+    font-size: 0.9rem;
+    line-height: 1;
+    cursor: pointer;
+    a{
+        color: white;
+        text-transform: uppercase;
+    }
+}
+
+
+
+#block-ganalfinal{
+    padding: 0px 20px;
+}
+#block-adquieretusentradas{
+    padding: 20px 20px;
+}
+
+.section-user{
+    #middle-content{
+        padding: 50px 0;
     }
 }
