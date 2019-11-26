@@ -123,3 +123,49 @@
         }
     }
 }
+
+
+.field-node--dynamic-block-fieldnode-block-ranking-por-reto{
+    display: inline-block;
+}
+
+.block-views-blockreto-reto-resultados{
+    .view-block-reto-de-la-semana{
+        display: inline-block;
+        .field-node--field-imagen{
+            border: solid 4px #ec5172;
+        }
+        .field-node--node-title{
+            span{
+                display: inline-block;
+                width: 100%;
+                a{
+                    color: #fff;
+                    font-size: 20px;
+                    text-align: center;
+                    display: inline-block;
+                    width: 100%;
+                }
+            }
+        }
+        img.heart{
+            max-width: 40%;
+        }
+        .item-list{
+            ul{
+                li{
+                    list-style:none;
+                    span{
+                        color: #fff;
+                        font-size: 20px;
+                        text-align: center;
+                        display: inline-block;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// url(/themes/custom/miss_canada_latina/images/favorite_icon.png)
