@@ -2,6 +2,6 @@ services:
   logger.channel.stripe_payments:
     parent: logger.channel_base
     arguments: ['stripe_payments']
-  stripe_payments.create:
+  stripe_payments:
     class: Drupal\stripe_payments\StripePaymentsCreate
     arguments: []

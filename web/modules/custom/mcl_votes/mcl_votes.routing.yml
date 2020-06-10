@@ -1,16 +1,25 @@
 
 mcl_votes.generate_mcl_vote:
-  path: '/mcl_votes/api/generate/mcl_vote/{entity_type}/{nid}'
+  path: '/mcl-votes/api/generate/mcl-vote/{entity_type}/{nid}'
   defaults:
     _controller: '\Drupal\mcl_votes\Controller\MclApiController::GenerateMclVote'
     _title: 'Generate Mcl Vote'
   methods: ['GET']
   requirements:
     _permission: 'access content'
+
 mcl_votes.generate_mcl_vote_form:
-  path: '/mcl_votes/form'
+  path: '/mcl-votes/form'
   defaults:
     _form: '\Drupal\mcl_votes\Form\GenerateMclVoteForm'
     _title: 'GenerateMclVoteForm'
   requirements:
     _access: 'TRUE'
+
+mcl_votes.generate_promotional_codes:
+  path: 'admin/mcl-votes/generate/codes'
+  defaults:
+    _controller: '\Drupal\mcl_votes\Controller\MclController::generateCodes'
+    _title: 'Generate Promotional Codes'
+  requirements:
+    _permission: 'administrator'

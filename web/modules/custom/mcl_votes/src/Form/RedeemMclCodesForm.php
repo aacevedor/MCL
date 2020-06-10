@@ -10,11 +10,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * Class GenerateMclVoteForm.
  */
-class GenerateMclVoteForm extends FormBase {
+class RedeemMclCodesForm extends FormBase {
 
   /**
    * Drupal\Core\Routing\CurrentRouteMatch definition.
@@ -45,7 +46,7 @@ class GenerateMclVoteForm extends FormBase {
   protected $node;
 
   /**
-   * Constructs a new GenerateMclVoteForm object.
+   * Constructs a new RedeemMclCodesForm object.
    */
   public function __construct(
     CurrentRouteMatch $current_route_match,
@@ -72,7 +73,7 @@ class GenerateMclVoteForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'generate_mcl_vote_form';
+    return 'redeem_mcl_codes_form';
   }
 
   /**
@@ -81,30 +82,25 @@ class GenerateMclVoteForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $this->node = $this->currentRouteMatch->getParameter('node');
 
-    $form['no_votes'] = [
-      '#type' => 'hidden',
-      '#title' => $this->t('No Votes'),
-      '#description' => $this->t('Just a text input'),
+    $form['code'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Into de promotional code'),
+      // '#description' => $this->t('Into the promotional code'),
       '#default_value' => '1',
-    ];
-
-    $form['message'] = [
-      '#type' => 'markup',
-      '#markup' => '<div class="result"></div>'
     ];
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Vote'),
-      '#ajax' => [
-        'callback' => '::setVote'
-      ]
+      '#value' => $this->t('Redeem'),
+      // '#ajax' => [
+      //   'callback' => '::generate'
+      // ]
     ];
 
-    $form['label'] = [
-      '#type' => 'markup',
-      '#markup' => '<div class="entity-name"> Vota por '. $this->node->title->value .' como tu favorita</div>'
-    ];
+    // $form['label'] = [
+    //   '#type' => 'markup',
+    //   '#markup' => '<div class="entity-name"> Vota por '. $this->node->title->value .' como tu favorita</div>'
+    // ];
 
     return $form;
   }
@@ -113,10 +109,29 @@ class GenerateMclVoteForm extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    foreach ($form_state->getValues() as $key => $value) {
-      // @TODO: Validate fields.
-    }
+    // foreach ($form_state->getValues() as $key => $value) {
+    //   // @TODO: Validate fields.
+    // }
     parent::validateForm($form, $form_state);
+
+    $nodes = $this->entityManager
+      ->getStorage('node')
+      ->loadByProperties([
+        'field_codigo' => $form_state->getValue('code'),
+      ]);
+
+      
+    if( !count($nodes) ){
+      $form_state->setError($form['code'],'The code is not valid');
+    }
+    
+    elseif( $nodes->field_usuario ){
+      $form_state->setError($form['code'],'The code are is used');
+    }
+    
+    else{
+      $form_state->{'node'} = $nodes[key($nodes)];
+    }
   }
 
   /**
@@ -127,30 +142,14 @@ class GenerateMclVoteForm extends FormBase {
     // foreach ($form_state->getValues() as $key => $value) {
     //   \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
     // }
-  }
-
-
-  public function setVote(  array $form, FormStateInterface $form_state ){
-
-    // $entity = $this->currentRouteMatch->getParameter('node');
-
-    $service = \Drupal::service('mcl_votes.generate_vote');
-    $response_service = $service->GenerateMclVote();
     
-    if((int)$response_service){
-      $response_service = $this->t('Thanks for your vote');
+    try {
+      $form_state->node->field_usuario = $this->currentUser->id();
+      $form_state->node->save();
+      $message = 'The code has been redeem';
+    } catch (\Throwable $th) {
+      $message = $th->getMessage();
     }
-
-    $response  = new AjaxResponse();
-    $response->addCommand(
-      new HtmlCommand(
-        '.result',
-        '<div class="my_top_message">' . $this->t('@result', ['@result' => $response_service]) . '</div>'
-        )
-    );
-
-    return $response;
-
+    drupal_set_message($this->t($message));
   }
-
 }

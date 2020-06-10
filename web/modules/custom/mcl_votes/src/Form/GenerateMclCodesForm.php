@@ -10,11 +10,12 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Session\AccountProxyInterface;
 use Drupal\Core\Entity\EntityManagerInterface;
+use Drupal\node\Entity\Node;
 
 /**
  * Class GenerateMclVoteForm.
  */
-class GenerateMclVoteForm extends FormBase {
+class GenerateMclCodesForm extends FormBase {
 
   /**
    * Drupal\Core\Routing\CurrentRouteMatch definition.
@@ -72,7 +73,7 @@ class GenerateMclVoteForm extends FormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'generate_mcl_vote_form';
+    return 'generate_mcl_codes_form';
   }
 
   /**
@@ -81,30 +82,34 @@ class GenerateMclVoteForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $this->node = $this->currentRouteMatch->getParameter('node');
 
-    $form['no_votes'] = [
-      '#type' => 'hidden',
-      '#title' => $this->t('No Votes'),
-      '#description' => $this->t('Just a text input'),
+    $form['no_codes'] = [
+      '#type' => 'number',
+      '#title' => $this->t('No. Codes'),
+      '#description' => $this->t('Into de number of codes to generate'),
       '#default_value' => '1',
     ];
 
-    $form['message'] = [
-      '#type' => 'markup',
-      '#markup' => '<div class="result"></div>'
+
+    $form['no_vodes_per_node'] = [
+      '#type' => 'number',
+      '#title' => $this->t('No. Votes Per Node'),
+      '#description' => $this->t('Into the number of votes per code'),
+      '#default_value' => '1',
     ];
+
 
     $form['submit'] = [
       '#type' => 'submit',
-      '#value' => $this->t('Vote'),
-      '#ajax' => [
-        'callback' => '::setVote'
-      ]
+      '#value' => $this->t('Generate'),
+      // '#ajax' => [
+      //   'callback' => '::generate'
+      // ]
     ];
 
-    $form['label'] = [
-      '#type' => 'markup',
-      '#markup' => '<div class="entity-name"> Vota por '. $this->node->title->value .' como tu favorita</div>'
-    ];
+    // $form['label'] = [
+    //   '#type' => 'markup',
+    //   '#markup' => '<div class="entity-name"> Vota por '. $this->node->title->value .' como tu favorita</div>'
+    // ];
 
     return $form;
   }
@@ -127,30 +132,32 @@ class GenerateMclVoteForm extends FormBase {
     // foreach ($form_state->getValues() as $key => $value) {
     //   \Drupal::messenger()->addMessage($key . ': ' . ($key === 'text_format'?$value['value']:$value));
     // }
-  }
 
+    $no_nodes = $form_state->getValue('no_codes');
+    $no_votes_per_node = $form_state->getValue('no_vodes_per_node');
 
-  public function setVote(  array $form, FormStateInterface $form_state ){
+    for ($i=1; $i <= $no_nodes ; $i++) { 
 
-    // $entity = $this->currentRouteMatch->getParameter('node');
+      $str_random = substr(md5(mt_rand()), 0, 7);
+      $node = Node::create([
+        'type'                      => 'transaccion',
+        'title'                     => t('code'). ' - ' .$str_random. ' - ' .$no_votes_per_node,
+        'field_cantidad'            => $no_votes_per_node,
+        'field_tipo_de_transaccion' => 21,
+        'field_codigo'              => $str_random,
+        // 'field_usuario'             => $this->currentUser->id(),
+        // 'field_candidata'           => $this->node->id(),
+        // 'field_reto'                => $this->reto->id()
+      ]);
 
-    $service = \Drupal::service('mcl_votes.generate_vote');
-    $response_service = $service->GenerateMclVote();
-    
-    if((int)$response_service){
-      $response_service = $this->t('Thanks for your vote');
+      try {
+        $node->save();
+        $message = $this->t('Node(s) has been successful');
+      } catch (\Throwable $th) {
+        $message = $this->t($th->getMessage());
+      }
+
+      drupal_set_message($message);
     }
-
-    $response  = new AjaxResponse();
-    $response->addCommand(
-      new HtmlCommand(
-        '.result',
-        '<div class="my_top_message">' . $this->t('@result', ['@result' => $response_service]) . '</div>'
-        )
-    );
-
-    return $response;
-
   }
-
 }

@@ -33,9 +33,9 @@ class StripePaymentsChargeController extends ControllerBase {
    * Constructs a new StripePaymentsChargeController object.
    */
   public function __construct(
-    AccountProxyInterface $current_user, 
-    CurrentRouteMatch $current_route, 
-    EntityTypeManager $entity_manager, 
+    AccountProxyInterface $current_user,
+    CurrentRouteMatch $current_route,
+    EntityTypeManager $entity_manager,
     StripePaymentsCreateInterface $stripe_payments ) {
     $this->currentUser = $current_user;
     $this->currentRoute = $current_route;
@@ -51,7 +51,7 @@ class StripePaymentsChargeController extends ControllerBase {
       $container->get('current_user'),
       $container->get('current_route_match'),
       $container->get('entity_type.manager'),
-      $container->get('stripe_payments.create')
+      $container->get('stripe_payments')
     );
   }
 
@@ -62,13 +62,10 @@ class StripePaymentsChargeController extends ControllerBase {
    *   Return Hello string.
    */
   public function create_charge() {
-
-    
     $request = (object)\Drupal::request()->request->all();
     $nid = $this->currentRoute->getParameter('nid');
-    
     if( $request->stripeToken && $nid){
-      $this->node = $this->entityManager->getStorage('node')->load($this->currentRoute->getParameter('nid'));  
+      $this->node = $this->entityManager->getStorage('node')->load($this->currentRoute->getParameter('nid'));
       if( $this->node ){
         $charge = $this->stripePayments->create($this->node, $this->currentUser, $request->stripeToken);
       }else{
@@ -77,52 +74,41 @@ class StripePaymentsChargeController extends ControllerBase {
     }else{
       $this->redirect('/');
     }
-
     if($charge->status == 'succeeded'){
       try {
-    
         self::createEntity();
-    
       } catch (\Throwable $th) {
-    
         drupal_set_message($th->getMessage(), 'warning');
-    
       }
-
       return [
         '#type' => 'markup',
         '#markup' => $this->t('Buy Complete!!')
       ];
-    }else{
+      }else{
       return [
         '#type' => 'markup',
         '#markup' => $this->t('Buy Failed!!')
       ];
     }
-
-    
   }
 
 
   private function createEntity(){
-
     $node = Node::create([
         'type'                      => 'transaccion',
         'title'                     => $this->t('purchase'). ' - ' .$this->node->title->value. ' - ' .$this->currentUser->getAccountName(),
         'field_cantidad'            => $this->node->field_cantidad->value,
-        'field_producto'            => $this->node->id->value,
-        'field_tipo_de_transaccion' => 20,
+        'field_producto'            => $this->node->id(),
+        'field_tipo_de_transaccion' => $this->node->field_tipo_de_producto->target_id,
         'field_price'               => $this->node->field_price->value,
         'field_usuario'             => $this->currentUser->id(),
     ]);
-
     if($node){
       $node->save();
       return true;
     }else{
       return false;
     }
-
   }
 
 }

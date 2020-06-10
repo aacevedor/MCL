@@ -16,7 +16,7 @@ class StripePaymentsCreate implements StripePaymentsCreateInterface {
 
   /**
    * Config Settings.
-   * 
+   *
    * @var string
    */
 
@@ -26,18 +26,11 @@ class StripePaymentsCreate implements StripePaymentsCreateInterface {
    * Constructs a new StripePaymentsCreate object.
    */
   public function __construct() {
-
-
-      $this->config = \Drupal::config(static::SETTINGS); 
-    
+      $this->config = \Drupal::config(static::SETTINGS);
       Stripe::setApiKey($this->config->get('secret_stripe_key'));
-
-    
-
   }
 
   public function create(Node $node, $user, string $token ){
-    
     $charge = Charge::create([
       'amount' => (int)$node->field_price->value * 100,
       'currency' => 'usd',
@@ -50,6 +43,5 @@ class StripePaymentsCreate implements StripePaymentsCreateInterface {
     ]);
     return $charge;
   }
-
 
 }

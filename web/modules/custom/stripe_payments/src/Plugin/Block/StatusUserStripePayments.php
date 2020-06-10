@@ -55,7 +55,7 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
     return 0;
   }
 
-  
+
   /**
    * {@inheritdoc}
    */
@@ -102,14 +102,23 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
    */
   public function build() {
     $entities = [];
-    $transaccions = \Drupal::entityTypeManager()->getStorage('node')->loadByProperties(['type' => 'transaccion', 'field_usuario' => $this->currentUser->id()]);
-    
+    $transaccions = \Drupal::entityTypeManager()
+      ->getStorage('node')
+      ->loadByProperties(
+        [
+          'type' => 'transaccion',
+          'field_usuario' => $this->currentUser->id(),
+          'field_tipo_de_transaccion' => [19,20]
+        ]
+      );
+
     foreach($transaccions as $key => $value){
       $tax_name = $value->get('field_tipo_de_transaccion')->referencedEntities()[0]->name->value;
       $entities[$tax_name][] = $value;
     }
 
     $total = [];
+
     if( count($entities) ){
       $array_keys = array_keys($entities);
       foreach($array_keys as $key => $value){
@@ -118,7 +127,7 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
         }
       }
       $total['diference'] = self::array_subtract( $total );
-    }else{  
+    }else{
       $total = 0;
     }
 
@@ -127,7 +136,7 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
     $build['#content']['data'] = $this->configuration['inputtext'];
     $build['#content']['user'] = $this->currentUser->getDisplayName();
     $build['#content']['total'] = $total;
-    
+
     return $build;
   }
 

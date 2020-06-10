@@ -48,8 +48,8 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
    * @var \Drupal\Core\Entity
    */
   protected $reto;
-  
-  
+
+
 
   /**
    * Constructs a new MclVotesGenerateVoteService object.
@@ -62,7 +62,7 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
 
   public function GenerateMclVote() {
 
-    
+
 
     $entity_type = $this->currentRouteMatch->getParameter('entity_type');
     $entity_id = $this->currentRouteMatch->getParameter('nid');
@@ -82,7 +82,7 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
 
     if( count($node_publish) > 1 || count($node_publish) == 0 ){
       try {
-        throw new \Exception(t("In this moment, isn't not posible"));  
+        throw new \Exception(t("In this moment, isn't not posible"));
       } catch (\Throwable $th) {
         return $th->getMessage();
       }
@@ -98,14 +98,14 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
       }else{
         $response = self::createEntity();
       }
-    
+
     } catch (\Throwable $th) {
       $response = $th->getMessage();
     }
 
 
     return $response;
-    
+
   }
 
 
@@ -143,22 +143,23 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
   }
 
   private function allowVotes(){
-    
+
     $entities = [];
     $transaccions = \Drupal::entityTypeManager()->getStorage('node')
       ->loadByProperties(
         [
-          'type' => 'transaccion', 
-          'field_usuario' => $this->currentUser->id()
+          'type' => 'transaccion',
+          'field_usuario' => $this->currentUser->id(),
+          'field_tipo_de_transaccion' => [19,20]
         ]
       );
-    
+
     foreach($transaccions as $key => $value){
       $tax_name = $value->get('field_tipo_de_transaccion')->referencedEntities()[0]->name->value;
       $entities[$tax_name][] = $value;
     }
 
-    $total = [];    
+    $total = [];
 
     if( count($entities) ){
       $array_keys = array_keys($entities);
