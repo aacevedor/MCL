@@ -12,17 +12,18 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Routing\CurrentRouteMatch;
 use Drupal\Core\Access\AccessResult;
+use Drupal\stripe_payments\Plugin\Block\StripePaymentsChargeBlock;
 
 
 /**
  * Provides a 'StripePaymentsChargeBlock' block.
  *
  * @Block(
- *  id = "stripe_payments_charge_block",
- *  admin_label = @Translation("Stripe payments charge block"),
+ *  id = "stripe_payments_charge_block_inscription",
+ *  admin_label = @Translation("Stripe payments charge block inscription"),
  * )
  */
-class StripePaymentsChargeBlock extends BlockBase implements ContainerFactoryPluginInterface {
+class StripePaymentsChargeBlockInscription extends StripePaymentsChargeBlock implements ContainerFactoryPluginInterface {
 
   /**
    * Drupal\Core\Session\AccountProxyInterface definition.
@@ -49,31 +50,6 @@ class StripePaymentsChargeBlock extends BlockBase implements ContainerFactoryPlu
    * @param \Drupal\Core\Session\AccountProxyInterface $current_user
    *   The AccountProxyInterface definition.
    */
-  public function __construct(
-    array $configuration,
-    $plugin_id,
-    $plugin_definition,
-    AccountProxyInterface $current_user,
-    CurrentRouteMatch $current_route
-  ) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->currentUser = $current_user;
-    $this->currentRoute = $current_route;
-
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('current_user'),
-      $container->get('current_route_match')
-    );
-  }
 
   /**
    * {@inheritdoc}
@@ -82,32 +58,20 @@ class StripePaymentsChargeBlock extends BlockBase implements ContainerFactoryPlu
     return 0;
   }
 
-    /**
+  /**
    * {@inheritdoc}
    */
-
   protected function blockAccess(AccountInterface $account) {
-    return AccessResult::allowedIf(in_array('authenticated',$account->getRoles()));
+    return AccessResult::allowedIf( true);
   }
-
-
-
 
   /**
    * {@inheritdoc}
    */
   public function build() {
-
-    // dpm($this->currentRoute->getParameter('node')->nid->value);
-    $build = [];
-    $build['#theme'] = 'stripe_payments_charge_block';
-    $build['stripe_payments_charge_block']['#markup'] = 'Implement StripePaymentsChargeBlock.';
-    $build['#attached']['library'][] = 'stripe_payments/stripe_payments';
-    $build['#content']['current_user_name'] = $this->currentUser->getAccountName();
-    $build['#content']['current_user_mail'] = $this->currentUser->getEmail();
-    $build['#content']['route'] = '/node/'.$this->currentRoute->getParameter('node')->nid->value.'/buy';
-
-    // $build['#cache']['max-age'] = 0;
+    $build = parent::build();
+    //dpm($this->currentRoute->getParameters());
+    $build['#content']['route'] = '/node/'. $this->currentRoute->getParameter('eform_submission')->field_producto->target_id.'/'.$this->currentRoute->getParameter('eform_submission')->id().'/buy';
 
     return $build;
   }

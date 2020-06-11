@@ -47,14 +47,12 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
     $this->currentUser = $current_user;
   }
 
-
   /**
    * {@inheritdoc}
    */
   public function getCacheMaxAge() {
     return 0;
   }
-
 
   /**
    * {@inheritdoc}
@@ -86,7 +84,6 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
       '#description' => $this->t('Just an input text'),
       '#default_value' => $this->configuration['inputtext'],
     ];
-
     return $form;
   }
 
@@ -111,14 +108,11 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
           'field_tipo_de_transaccion' => [19,20]
         ]
       );
-
     foreach($transaccions as $key => $value){
       $tax_name = $value->get('field_tipo_de_transaccion')->referencedEntities()[0]->name->value;
       $entities[$tax_name][] = $value;
     }
-
     $total = [];
-
     if( count($entities) ){
       $array_keys = array_keys($entities);
       foreach($array_keys as $key => $value){
@@ -130,16 +124,13 @@ class StatusUserStripePayments extends BlockBase implements ContainerFactoryPlug
     }else{
       $total = 0;
     }
-
     $build = [];
     $build['#theme'] = 'status_user_stripe_payments_block';
     $build['#content']['data'] = $this->configuration['inputtext'];
     $build['#content']['user'] = $this->currentUser->getDisplayName();
     $build['#content']['total'] = $total;
-
     return $build;
   }
-
 
   public function array_subtract(array $input) {
     $result = reset($input);                            // First element of the array

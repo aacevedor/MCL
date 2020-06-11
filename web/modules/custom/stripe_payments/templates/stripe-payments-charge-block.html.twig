@@ -15,7 +15,7 @@
     {% for content in value %}
         <p>{{value}}</p>
     {% endfor %}
-    <form  action="/node/{{content['nid']}}/buy" method="post" id="payment-form">
+    <form  action="{{content['route']}}" method="post" id="payment-form">
     <div class="form-row">
         <div class="columns">
             <label for="name">

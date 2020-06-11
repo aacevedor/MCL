@@ -7,8 +7,18 @@ stripe_payments.config_form:
     _permission: 'administer site configuration'
 
 
-stripe_payments.stripe_payments_charge_controller_hello:
+stripe_payments.stripe_payments_charge_product:
   path: '/node/{nid}/buy'
+  defaults:
+    _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::create_charge'
+    _title: 'Buy Sucessfull'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: 'TRUE'
+
+stripe_payments.stripe_payments_charge_inscription:
+  path: '/node/{nid}/{sid}/buy'
   defaults:
     _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::create_charge'
     _title: 'Buy Sucessfull'

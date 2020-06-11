@@ -49,8 +49,6 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
    */
   protected $reto;
 
-
-
   /**
    * Constructs a new MclVotesGenerateVoteService object.
    */
@@ -61,25 +59,19 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
   }
 
   public function GenerateMclVote() {
-
-
-
     $entity_type = $this->currentRouteMatch->getParameter('entity_type');
     $entity_id = $this->currentRouteMatch->getParameter('nid');
-
     if($entity_type && $entity_id){
       $this->node = $this->entityManager->getStorage('node')->load($entity_id);
     }else{
       $this->node = $this->currentRouteMatch->getParameter('node');
     }
-
     $node_publish = $this->entityManager
       ->getStorage('node')
       ->loadByProperties([
         'status' => 1,
         'type' => 'reto'
       ]);
-
     if( count($node_publish) > 1 || count($node_publish) == 0 ){
       try {
         throw new \Exception(t("In this moment, isn't not posible"));
@@ -87,25 +79,17 @@ class MclVotesGenerateVoteService implements MclVotesGenerateVoteServiceInterfa 
         return $th->getMessage();
       }
     }
-
     $this->reto = $node_publish[key($node_publish)];
-
-
     try {
-
       if( !self::allowVotes() ){
         throw new \Exception(t('You do not have enough votes to complete the transaction'));
       }else{
         $response = self::createEntity();
       }
-
     } catch (\Throwable $th) {
       $response = $th->getMessage();
     }
-
-
     return $response;
-
   }
 
 
