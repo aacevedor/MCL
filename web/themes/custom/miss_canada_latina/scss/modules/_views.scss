@@ -1,5 +1,5 @@
 #block-miss-canada-latina-content{
-    
+
     .item-list{
         ul{
             display: inline-block;
@@ -12,7 +12,7 @@
     }
     .more-link{
         text-align: center;
-        
+
         vertical-align: middle;
         margin: 0 0 1rem 0;
         font-family: inherit;
@@ -31,9 +31,10 @@
             display: inline-block;
             border: solid 1px $mcl-title-color;
             padding: 15px;
+          background-color: $mcl-title-color;
         }
     }
-    
+
 }
 
 .list-non-decoration{
@@ -51,13 +52,11 @@
                 margin: 0 0 60px 0;
                 position: relative;
                 div.row{
-                    
                     div{
                         &:first-child{
                             padding: 0!important;
                         }
                     }
-
                     &:last-child{
                         background-color:$white;
                         padding: 20px;
@@ -87,9 +86,9 @@
                 }
                 &:hover{
                     div.row{
-                        
-                        background-color: $mcl-title-color;
-                        
+
+                        background-color: $blue-light;
+
                     }
 
                     div.row:nth-child(2n) {
@@ -104,18 +103,18 @@
                         padding-right: 0;
                         padding-left: 0;
                     }
-                    
+
                     .field-node--node-title{
                         h2{
-                            a {color: white!important}
+                            a {color: $black!important}
                         }
                     }
 
                     .field-node--field-fecha div div{
-                        color:$white;
+                        color:$black;
                     }
                     .field-node--field-pais div div a{
-                        color:$white !important;
+                        color:$black !important;
                     }
 
                 }

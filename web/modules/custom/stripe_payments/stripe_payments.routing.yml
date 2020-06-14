@@ -10,7 +10,7 @@ stripe_payments.config_form:
 stripe_payments.stripe_payments_charge_product:
   path: '/node/{nid}/buy'
   defaults:
-    _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::create_charge'
+    _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::pay'
     _title: 'Buy Sucessfull'
   requirements:
     _permission: 'access content'
@@ -20,7 +20,7 @@ stripe_payments.stripe_payments_charge_product:
 stripe_payments.stripe_payments_charge_inscription:
   path: '/node/{nid}/{sid}/buy'
   defaults:
-    _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::create_charge'
+    _controller: '\Drupal\stripe_payments\Controller\StripePaymentsChargeController::pay'
     _title: 'Buy Sucessfull'
   requirements:
     _permission: 'access content'

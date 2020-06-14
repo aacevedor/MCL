@@ -6,13 +6,13 @@
             border-bottom: solid 1px $color-text;
             padding: 4px 0px;
             a{
-                color:$white;
-                
+                color:$title-gray;
+
             }
             a.is-active{
                 color:$mcl-title-color!important;
             }
         }
-        
+
     }
 }

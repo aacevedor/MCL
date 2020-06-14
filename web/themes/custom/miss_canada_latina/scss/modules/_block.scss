@@ -1,5 +1,5 @@
 
-@mixin more-link-button($text-aling, $border-color) {
+@mixin more-link-button($text-aling, $border-color, $background-color: #f90e97) {
     .more-link{
         text-align: $text-aling;
         vertical-align: middle;
@@ -13,6 +13,8 @@
         font-size: 0.9rem;
         line-height: 1;
         cursor: pointer;
+        background-color: $background-color;
+        text-align: center;
         a{
             color: white;
             text-transform: uppercase;
@@ -32,7 +34,7 @@
         font-size: 1.8em!important;
         margin:0;
     }
-} 
+}
 
 
 // menus
@@ -43,24 +45,24 @@
             text-transform: uppercase;
         }
     }
-} 
+}
 
 #block-miss-canada-latina-main-menu{
     ul{
         float: right;
         li{
             a{
-                color:$white
+                color:$black-letter-menu
             }
             a.is-active{
-                color:$mcl-title-color 
+                color:$mcl-title-color
             }
         }
     }
 }
 
 #block-socialmedialinks{
-    padding: 20px 0; 
+    padding: 20px 0;
     ul{
         float: right;
         li{
@@ -87,19 +89,19 @@
         }
     }
 }
- 
+
 
 #block-views-block-capitulos-block-1{
     margin: 70px 0px 100px 0;
     h2{
-        
+
         text-align: center;
         margin: 0 0 45px 0;
 
     }
 
     header{
-        color:$white;
+        color:$title-gray;
         text-align: center;
         font-size: $info-font-size;
     }
@@ -117,14 +119,14 @@
 #block-views-block-capitulos-block-3{
     margin: 70px 0px 100px 0;
     h2{
-        color:$white; 
+        color:$title-gray;
         text-align: center;
         margin: 0 0 45px 0;
 
     }
 
     header{
-        color:$white;
+        color:$title-gray;
         text-align: center;
         font-size: $info-font-size;
     }
@@ -137,15 +139,20 @@
             height: 444px;
         }
     }
-    @include more-link-button(center, $white);
-}
+  .more-link{
+    a{
+      background-color: $mcl-title-color;
+    }
+  }
+    @include more-link-button(center, $mcl-title-color , none);
+},
 
 #block-views-block-capitulos-block-2{
     margin: 70px 0px 100px 0;
     h2{
         text-align: center;
         margin: 0 0 45px 0;
-    } 
+    }
     ul.slide__content{
         li.slide__grid{
             min-width: 360px;
@@ -157,18 +164,19 @@
     background-color: $mcl-body-background;
     border-top: solid 1px $white;
     padding: 35px 0 20px 0px;
+    border-bottom: none;
     div{
         color:$color-text;
     }
     a{
-        color: white;
+        color: $title-gray;
     }
-    
+
 }
 
 #block-quicktabssponsors{
     margin: 70px 0px 100px 0;
-        
+
     h2{
         text-align: center;
         margin: 0 0 45px 0;
@@ -185,9 +193,9 @@
             }
         }
         li.active{
-            a{color:$white}
+            a{color:$title-gray}
         }
-        
+
     }
 }
 
@@ -195,8 +203,8 @@
 #block-views-block-candidatas-block-1{
 
     margin: 70px 0px 100px 0;
-        
-    
+
+
     .block-title{
         text-align: center;
         margin: 0 0 0px 0;
@@ -217,13 +225,13 @@
                     &:last-child{
                     position: absolute;
                     bottom: 0px;
-                    background-color:$white;
+                    background-color:$blue-light;
                     display: none;
                     width: 100%;
                     min-height: 20%;
                     padding:44px 0px 24px 38px;
-                    
-                    
+
+
 
                     .field-node--node-title{
                         h2{
@@ -235,7 +243,7 @@
                             text-align: left;
                             margin: 0;
                             a{
-                                color: $mcl-title-color;
+                                color: $black;
                             }
                         }
                     }
@@ -244,7 +252,7 @@
                         color:$black;
                     }
                     .field-node--field-pais{
-                        color:$black;
+                        a{color:$black;}
                     }
 
                 }
@@ -254,13 +262,13 @@
                     &:last-child{
                         display: inline-block;
                     }
-                }        
+                }
 
             }
-            
+
         }
-        
-        
+
+
     }
     // .field-node--node-title{display: none;}
     // .field-node--field-fecha{display: none;}
@@ -278,8 +286,8 @@
         left: 20%;
         font-size: 2em;
         a{
-            font-family: 'Parisienne', cursive;
-            color: #e55b99;
+            //font-family: 'Parisienne', cursive;
+            color: $mcl-title-color;
             font-size: 2.8vw;
         }
     }
@@ -296,7 +304,7 @@
             font-size: 3.7vw;
             line-height: 80px;
         }
-        
+
     }
 
     .field-node--node-link{
@@ -314,18 +322,18 @@
         @include more-link-button(center, $white);
     }
 
-    
+
 }
 #stripe-user-status-payments{
-    color:#fff;
-    
+    color:$title-gray;
+
     div{
-        color:#fff;
+        color:$title-gray;
     }
     span{
-        color:#fff;
+        color:$title-gray;
         font-size: 22px;
-    
+
     }
 
     span.name{
@@ -342,32 +350,32 @@
         border-bottom:none;
     }
 
-}   
+}
 
 
 
-.block-views-blockproductos-como-votar, 
+.block-views-blockproductos-como-votar,
 .field-name-dynamic-block-fieldblock-content--como-votar-{
     @include more-link-button(left, $mcl-title-color);
-    
+
     .contextual-region{
         display: inline-block;
         padding: 0 0 0 10px;
         div.views-row:last-of-type {
             border-bottom: none;
         }
-        
+
     }
     header{
         div{
             span{
-                color:white;
+                color:$title-gray;
                 font-size: 1.8vw;
                 font-weight: 500;
             }
         }
     }
-    
+
     .views-row.column:last-child:not(:first-child), .views-row.columns:last-child:not(:first-child) {
         float: left;
         border-bottom: none;
@@ -385,7 +393,7 @@
                     color: $color-text;
                 }
             }
-            
+
         }
         .views-field-field-price{
             color: white;
@@ -416,7 +424,7 @@
     .entity-name{
         color: white;
         font-size: 20px;
-        
+
     }
 }
 
@@ -444,20 +452,20 @@
     .field-node--node-title {
         h3{
             font-family: 'Lora', serif;
-            color: white;
+            color: $black;
             font-size: 2em;
             line-height: 10px;
             margin: 30px 0 10px 0px;
         }
-        
+
     }
- 
+
     .field-node--body {
-        
+
     }
 
     .field-node--field-rango-de-fechas{
-        
+
     }
 
 
@@ -508,4 +516,26 @@
     #middle-content{
         padding: 50px 0;
     }
+}
+
+#block-carritodecompras{
+  a{
+    background: url(/themes/custom/miss_canada_latina/images/vender.svg);
+    display: inline-block;
+    width: 31px;
+    height: 31px;
+    background-size: 31px 31px;
+    background-repeat: no-repeat;
+  }
+  p{
+    padding: 1rem;
+    width: 100%;
+    text-align: right;
+  }
+}
+svg{ fill:$mcl-title-color; }
+
+
+.block-views-blockreto-reto-de-la-semana{
+  color:$title-gray;
 }

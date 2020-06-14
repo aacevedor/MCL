@@ -6,14 +6,15 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Parisienne', cursive;
+  //font-family: 'Parisienne', cursive;
   color: $mcl-title-color;
 }
 h1{
   font-size: $mcl-h1-title-font-size;
 }
-h2{ 
-  font-size: $mcl-h2-title-font-size; 
+h2{
+  font-size: $mcl-h2-title-font-size;
+  font-weight: 600;
 }
 h3{}
 h4{}

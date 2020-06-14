@@ -63,13 +63,13 @@ class StripePaymentsChargeController extends ControllerBase {
    * @return string
    *   Return Hello string.
    */
-  public function create_charge() {
+  public function pay() {
     $request = (object)\Drupal::request()->request->all();
     $this->node       = ($nid = $this->currentRoute->getParameter('nid')) ? $this->entityManager->getStorage('node')->load($nid):NULL;
     $this->submission = ($sid = $this->currentRoute->getParameter('sid')) ? $this->entityManager->getStorage('eform_submission')->load($sid):NULL;
     if( isset($request->stripeToken) && !is_null($this->node)){
       try {
-        $charge = $this->stripePayments->create($this->node, $this->submission, $this->currentUser, $request->stripeToken);
+        $charge = $this->stripePayments->createCharge($this->node, $this->submission, $this->currentUser, $request->stripeToken);
       } catch (\Throwable $th) {
         drupal_set_message($th->getMessage(), 'error');
       }
@@ -78,7 +78,7 @@ class StripePaymentsChargeController extends ControllerBase {
       try {
         self::createTrasaction();
         if(isset($charge->metadata->inscription)) {
-          self::createUser();
+          self::createUser($charge->customer);
           self::createCandidata();
         }
       } catch (\Throwable $th) {
@@ -138,7 +138,7 @@ class StripePaymentsChargeController extends ControllerBase {
     return true;
   }
 
-  private function createUser(){
+  private function createUser($customer_id){
     $lang = \Drupal::languageManager()->getCurrentLanguage()->getId();
     $user = \Drupal\user\Entity\User::create();
     $user->setUsername($this->submission->field_mail->value); // You could also just set this to "Bob" or something...
@@ -152,6 +152,7 @@ class StripePaymentsChargeController extends ControllerBase {
     $user->set("preferred_admin_langcode", $lang);
     $user->set("field_nombres", $this->submission->field_nombres->value);
     $user->set("field_apellidos", $this->submission->field_apellidos->value);
+    $user->set("field_informacion_stripe", $customer_id);
     $user->save();
     $this->user = $user;
   }
